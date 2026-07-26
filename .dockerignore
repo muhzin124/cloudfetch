@@ -1,0 +1,30 @@
+# Don't copy these into the Docker image.
+
+# Local virtual environment — the container installs its own
+# dependencies fresh via requirements.txt, so this is unnecessary
+# and would bloat the image significantly.
+.venv/
+
+# Secrets — never bake tokens into an image. Passed in at
+# container runtime instead via environment variables.
+.env
+
+# Python bytecode cache — regenerated automatically, no need to ship it.
+__pycache__/
+*.pyc
+
+# OS junk files.
+.DS_Store
+
+# Git metadata — not needed inside the running container.
+.git/
+.gitignore
+
+# Local downloaded videos / leftover partial downloads —
+# these are temp files, not part of the app itself.
+downloads/*
+logs/*
+
+# Editor/IDE folders (harmless to include, but no reason to).
+.vscode/
+.idea/

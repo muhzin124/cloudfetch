@@ -1,0 +1,34 @@
+# -----------------------------
+# Secrets — never commit these.
+# -----------------------------
+.env
+
+# -----------------------------
+# Python
+# -----------------------------
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# -----------------------------
+# Project runtime data
+# -----------------------------
+# Downloaded videos are temporary and deleted after upload —
+# never anything we want in version control.
+downloads/*
+!downloads/.gitkeep
+
+logs/*
+!logs/.gitkeep
+
+# -----------------------------
+# OS junk
+# -----------------------------
+.DS_Store
+
+# -----------------------------
+# Editor/IDE
+# -----------------------------
+.vscode/
+.idea/

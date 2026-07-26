@@ -1,0 +1,28 @@
+services:
+  cloudfetch:
+    # Build the image from the Dockerfile in this same folder,
+    # rather than pulling a pre-built image from somewhere.
+    build: .
+
+    container_name: cloudfetch-bot
+
+    # Load environment variables (like BOT_TOKEN) from your
+    # existing .env file at runtime. This is how the secret
+    # gets into the container WITHOUT being baked into the
+    # image itself (the image stays reusable/shareable).
+    env_file:
+      - .env
+
+    # If the container crashes or the server reboots, Docker
+    # will automatically restart it. Important for something
+    # that needs to "just always be running" like a bot your
+    # dad relies on, without you having to SSH in and restart
+    # it manually every time.
+    restart: unless-stopped
+
+    # Persist logs outside the container so they survive a
+    # container rebuild/restart, and so you can inspect them
+    # from the host machine without needing to exec into the
+    # container.
+    volumes:
+      - ./logs:/app/logs
