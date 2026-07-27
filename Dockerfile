@@ -28,8 +28,21 @@ ENV PYTHONUNBUFFERED=1
 # We clean up apt's cache afterward to keep the image lean.
 # ---------------------------------------------------------
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ffmpeg && \
+    apt-get install -y --no-install-recommends ffmpeg curl unzip && \
     rm -rf /var/lib/apt/lists/*
+
+# ---------------------------------------------------------
+# Install Deno.
+# yt-dlp needs an actual JavaScript runtime to decode
+# YouTube's signature-scrambling scheme on some videos
+# (without it, yt-dlp can only fetch thumbnail images, not
+# real video/audio formats — this is what caused the
+# "Requested format is not available" error on some links).
+# Deno is yt-dlp's recommended lightweight JS runtime for
+# this purpose.
+# ---------------------------------------------------------
+RUN curl -fsSL https://deno.land/install.sh | sh
+ENV PATH="/root/.deno/bin:${PATH}"
 
 # ---------------------------------------------------------
 # Set the working directory inside the container.

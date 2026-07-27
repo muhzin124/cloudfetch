@@ -2,6 +2,9 @@
 # Secrets — never commit these.
 # -----------------------------
 .env
+*.pem
+cookies.txt
+*cookies*.txt
 
 # -----------------------------
 # Python
